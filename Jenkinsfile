@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-      yaml """
+            yaml """
 apiVersion: v1
 kind: Pod
 spec:
@@ -19,13 +19,14 @@ spec:
     secret:
       secretName: regcred
 """
+        }
     }
 
     environment {
         VENV_DIR = '.venv'
         DEPLOY_SERVER = 'user@your-server-ip'
         DEPLOY_DIR = '/opt/flask-api'
-        BRANCH_NAME = "${env.GIT_BRANCH}".replaceFirst(/^origin\//, '')
+        BRANCH_NAME = "${env.GIT_BRANCH}".replaceFirst(/^origin\\//, '')
     }
 
     stages {
@@ -57,7 +58,7 @@ spec:
 
         stage('Deploy to Server') {
             when {
-                expression { return BRANCH_NAME == 'main' }
+                expression { return env.BRANCH_NAME == 'main' }
             }
             steps {
                 sshagent (credentials: ['ssh-key-id']) {
@@ -82,4 +83,4 @@ spec:
                  body: "Check Jenkins for details: ${env.BUILD_URL}"
         }
     }
-}}
+}
