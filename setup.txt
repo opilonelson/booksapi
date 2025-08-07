@@ -1,0 +1,67 @@
+Testing the Flask Book API using curl
+====================================
+
+1. Create a New Book (POST):This request adds a new book to your database:
+
+curl -X POST http://127.0.0.1:5000/books \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Flask for Beginners", "author": "Jane Doe", "isbn": "978-1-234-56789-0"}'
+Expected Response:
+
+{
+  "id": 1,
+  "title": "Flask for Beginners",
+  "author": "Jane Doe",
+  "isbn": "978-1-234-56789-0"
+}
+2. Retrieve All Books (GET): This request fetches a list of all books:
+
+curl http://127.0.0.1:5000/books
+Expected Response:
+
+[
+  {
+    "id": 1,
+    "title": "Flask for Beginners",
+    "author": "Jane Doe",
+    "isbn": "978-1-234-56789-0"
+  }
+]
+3. Retrieve a Single Book by ID (GET): This request fetches details of a specific book:
+
+curl http://127.0.0.1:5000/books/1
+Expected Response:
+
+json
+Copy
+Edit
+{
+  "id": 1,
+  "title": "Flask for Beginners",
+  "author": "Jane Doe",
+  "isbn": "978-1-234-56789-0"
+}
+4. Update a Book (PUT): This request updates the details of an existing book:
+
+curl -X PUT http://127.0.0.1:5000/books/1 \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Advanced Flask", "author": "John Smith", "isbn": "978-1-234-56789-1"}'
+Expected Response:
+
+{
+  "id": 1,
+  "title": "Advanced Flask",
+  "author": "John Smith",
+  "isbn": "978-1-234-56789-1"
+}
+5. Delete a Book (DELETE):
+
+curl -X DELETE http://127.0.0.1:5000/books/1
+Expected Response:
+
+json
+Copy
+Edit
+{
+  "message": "Book deleted"
+}
