@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 from sqlalchemy.exc import IntegrityError
-
+#add a simple comment
 app = Flask(__name__)
 
 # Use environment variable
